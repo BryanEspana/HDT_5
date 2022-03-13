@@ -28,7 +28,7 @@ def simulation(name, env, memory, cpu, RunInicial, ProcesosInstruction, ram):
     #Repetir hasta que se acaben los procesos
     while ProcesosInstruction > 0: 
         #Instrucción [READY] cuando pasa de NEW a utilizarlo
-        print('%s en [READY] En tiempo: %d\nProgramas pendientes %d' % (name, env.now, ProcesosInstruction))
+        print('%s en [READY] En tiempo: %d\nTiempo en Programa pendiente: %d' % (name, env.now, ProcesosInstruction))
         #Empieza a correr los programas [RUNING]
         with cpu.request() as req:
             yield req
@@ -36,7 +36,7 @@ def simulation(name, env, memory, cpu, RunInicial, ProcesosInstruction, ram):
             #Simulador de ciclo 
             yield env.timeout(1) 
             #Creación del procesador
-            print('%s en [RUNNING] En tiempo: %d\nCantidad de ram: %d, procesos pendientes: %d RAM disponible: %d' % (name, env.now, ram, ProcesosInstruction, memory.level))
+            print('%s en [RUNNING] En tiempo: %d\nCantidad de ram: %d, procesos pendientes: %d, RAM disponible: %d' % (name, env.now, ram, ProcesosInstruction, memory.level))
             #Si no hay ningun proceso selecciona el otro if
             if  ProcesosInstruction >= 0:
                 numeroRandom = random.randint(1, 2)
@@ -67,7 +67,7 @@ timeTotal = 0
 for i in range(processInicial):
     RunInicial = 0
     #Tiempo en el que inician todas las aplicaciones (0)
-    ProcesosInstruction = random.randint(1, 200)  
+    ProcesosInstruction = random.randint(1, 25)  
     #Operaciones realizadas entre 1 y 25 aleatoriamente
     ramUtilizada = random.randint(1, 10)
     #Cantidad de Ram por cada proceso
